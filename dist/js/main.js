@@ -1,1 +1,1 @@
-console.log("hello");
+(()=>{"use strict";const o={logger(){console.log("two module init")}};({logger(){console.log("one module init")}}).logger(),o.logger()})();
