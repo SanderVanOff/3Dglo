@@ -1,5 +1,4 @@
-import oneModule from './one';
-import twoModule from './two';
+import timer from './modules/timer';
+import twoModule from './modules/two';
 
-oneModule.logger();
-twoModule.logger();
+timer('22 december 2021');
