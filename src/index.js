@@ -1,4 +1,7 @@
 import timer from './modules/timer';
-import twoModule from './modules/two';
+import menu from './modules/menu';
+import modal from './modules/modal';
 
 timer('22 december 2021');
+menu();
+modal();
