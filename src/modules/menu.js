@@ -1,19 +1,30 @@
 const menu = () => {
-    const menuBtn = document.querySelector('.menu');
     const menu = document.querySelector('menu');
-    const closeBtn = menu.querySelector('.close-btn');
-    const menuItems = menu.querySelectorAll('ul >li > a');
-
 
     const toggleMenu = () => {
         menu.classList.toggle('active-menu');
     };
 
-    menuBtn.addEventListener('click', toggleMenu);
-    closeBtn.addEventListener('click', toggleMenu);
+    const goToAncor = (e) => {
+        document.querySelector(e.hash).scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        });
+    };
 
-    menuItems.forEach(item => item.addEventListener('click', toggleMenu));
-
+    document.addEventListener('click', (e) => {
+        if(e.target.closest('.close-btn') || e.target.closest('.menu')) {
+            e.preventDefault();
+            toggleMenu();
+        } else if(e.target.closest('a')) {
+            e.preventDefault();
+            goToAncor(e.target.closest('a'));
+            toggleMenu();
+        } else if(e.target !== menu && menu.classList.contains('active-menu')) {
+            toggleMenu();
+        }
+    })
+        
 };
 
 export default menu;
