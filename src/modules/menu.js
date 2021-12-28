@@ -16,14 +16,14 @@ const menu = () => {
         if(e.target.closest('.close-btn') || e.target.closest('.menu')) {
             e.preventDefault();
             toggleMenu();
-        } else if(e.target.closest('a')) {
+        } else if(e.target.matches('ul > li > a')) {
             e.preventDefault();
             goToAncor(e.target.closest('a'));
             toggleMenu();
         } else if(e.target !== menu && menu.classList.contains('active-menu')) {
             toggleMenu();
         }
-    })
+    });
         
 };
 
