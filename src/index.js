@@ -9,7 +9,7 @@ import slider from './modules/slider';
 timer('22 december 2021');
 menu();
 modal();
-calculator();
+calculator(100);
 forms();
 tabs();
 slider({
