@@ -1,3 +1,5 @@
+import {animate} from './helper.js';
+
 const modal = () => {
     const popupBtns = document.querySelectorAll('.popup-btn');
     const modal = document.querySelector('.popup');
@@ -10,22 +12,36 @@ const modal = () => {
 
         if (modal.style.display !== 'block') {
             modal.style.display = 'block';
-            setTimeout(() => {
-                modal.style.opacity = '1';
-                modal.style.transform = 'scale(1)';
-            }, 200);
+            animate({
+                duration: 100,
+                timing(timeFraction) {
+                    return timeFraction;
+                },
+                draw(progress) {
+                    modal.style.opacity = `${progress}`;
+                    modal.style.transform = `scale(${progress})`;
+                }
+            });
         } else {
-            modal.style.transform = 'scale(0)';
-            modal.style.opacity = '0';
-            setTimeout(() => {
-                modal.style.display = 'none';
-            }, 200);
+            animate({
+                duration: 100,
+                timing(timeFraction) {
+                    return timeFraction;
+                },
+                draw(progress) {
+                    modal.style.transform = 'scale(0)';
+                    modal.style.opacity = '0';
+                    setTimeout(() => {
+                            modal.style.display = 'none';
+                        }, 200);
+                }
+            });
         }
     };
 
     popupBtns.forEach(btn => {
         btn.addEventListener('click', () => {
-            if(document.documentElement.clientWidth > 768) {
+            if (document.documentElement.clientWidth > 768) {
                 animateModal();
             } else {
                 modal.style.transform = 'scale(1)';
@@ -36,13 +52,13 @@ const modal = () => {
     });
 
 
-    modal.addEventListener('click', (e)=> {
-        if(!e.target.closest('.popup-content') || e.target.classList.contains('popup-close')) {
-            if(document.documentElement.clientWidth > 768) {
+    modal.addEventListener('click', (e) => {
+        if (!e.target.closest('.popup-content') || e.target.classList.contains('popup-close')) {
+            if (document.documentElement.clientWidth > 768) {
                 animateModal();
             } else {
                 modal.style.display = 'none';
-            }  
+            }
         }
     });
 

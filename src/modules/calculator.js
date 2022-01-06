@@ -1,3 +1,4 @@
+import {animate} from './helper.js';
 const calc = (price = 100) => {
     const calcBlock = document.querySelector('.calc-block');
     const calcType = document.querySelector('.calc-type');
@@ -7,21 +8,6 @@ const calc = (price = 100) => {
     const total = document.querySelector('#total');
 
     const calcInputs = document.querySelectorAll('.calc-block > input');
-
-
-
-    const increaseTotalNum =({num, time = 5000, step = 1, elem}) => {
-        let count = 0;
-        let t = Math.round(time / (num / step));
-        let interval = setInterval(() => {
-            count = count + step;
-            if (count == num) {
-                clearInterval(interval);    
-            }
-            elem.textContent = count;
-        }, t);
-    };
-
 
     const countCalc = () => {
         const calcTypeValue = +calcType.options[calcType.selectedIndex].value;
@@ -43,11 +29,15 @@ const calc = (price = 100) => {
 
         if (calcType.value && calcSquare.value) {
             totalValue = price * calcTypeValue * calcSquareValue * calcCountValue * calcDayValue;
-            increaseTotalNum({
-                num: totalValue,
-                elem: total,
-                step: 20,
-                time: 10
+
+            animate({
+                duration: 500,
+                timing(timeFraction) {
+                    return Math.pow(timeFraction, 4);
+                },
+                draw(progress) {
+                    total.textContent = Math.round(progress * totalValue);
+                }
             });
         } else {
             totalValue = 0;
