@@ -5,6 +5,7 @@ import calculator from './modules/calculator';
 import forms from './modules/forms';
 import tabs from './modules/tabs';
 import slider from './modules/slider';
+import sendForm from './modules/sendForm';
 
 timer('22 december 2021');
 menu();
@@ -23,4 +24,13 @@ slider({
     dotClass: 'dot',
     dotActiveClass: 'dot-active',
     timer: 3000
+});
+sendForm({
+    idForm: '#form1',
+});
+sendForm({
+    idForm: '#form2',
+});
+sendForm({
+    idForm: '#form3',
 });
