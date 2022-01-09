@@ -1,4 +1,8 @@
-const animate = ({timing, draw, duration}) => {
+const animate = ({
+    timing,
+    draw,
+    duration
+}) => {
 
     let start = performance.now();
 
@@ -21,4 +25,14 @@ const animate = ({timing, draw, duration}) => {
     });
 };
 
-export {animate};
+export {
+    animate
+};
+
+
+export const goToAncor = (e) => {
+    document.querySelector(e.hash).scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+    });
+};
