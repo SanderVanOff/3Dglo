@@ -7,7 +7,7 @@ import tabs from './modules/tabs';
 import slider from './modules/slider';
 import sendForm from './modules/sendForm';
 
-timer('22 december 2021');
+timer('14 january 2022');
 menu();
 modal();
 calculator(100);

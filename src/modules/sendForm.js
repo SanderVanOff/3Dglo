@@ -38,18 +38,18 @@ const sendForm = ({idForm}) => {
         const formData = new FormData(form);
         const formBody = {};
 
-        // statusBlock.textContent = loadText;
-        statusBlock.innerHTML = loadText;
-        form.append(statusBlock);
-        formElements.forEach(input => {
-            input.disabled = true;
-            input.style.background = 'rgba(255,255,255,0.9)';
-        });
-
         formData.forEach((val, key) => {
             formBody[key] = val;
         });
         if(validate(formElements)) {
+
+            statusBlock.innerHTML = loadText;
+            form.append(statusBlock);
+
+            formElements.forEach(input => {
+                input.disabled = true;
+                input.style.background = 'rgba(255,255,255,0.9)';
+            });
             sendData(formBody)
             .then(() => {
                 statusBlock.innerHTML = '';
@@ -70,7 +70,8 @@ const sendForm = ({idForm}) => {
                 statusBlock.textContent = errorText;
             });
         } else {
-            alert('Данные не валидны');
+            alert('Данные не валидны, либо не заполнены все поля');
+            
         }
     };
 
