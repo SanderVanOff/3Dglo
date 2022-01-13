@@ -1,5 +1,5 @@
 import {loader} from './helper';
-const sendForm = ({idForm}) => {
+const sendForm = ({idForm, someElem = []}) => {
     const form = document.querySelector(idForm);
     const formElements = form.querySelectorAll('input');
 
@@ -41,6 +41,17 @@ const sendForm = ({idForm}) => {
         formData.forEach((val, key) => {
             formBody[key] = val;
         });
+
+        someElem.forEach(elem => {
+            const element = document.querySelector(elem.id);
+            
+            if(elem.type === 'block' && +element.textContent !== 0) {
+                formBody.calculator = element.textContent;
+            } else if(elem.type === 'input' && +element.value !== 0) {
+                formBody.calculator = element.value;
+            }
+        });
+
         if(validate(formElements)) {
 
             statusBlock.innerHTML = loadText;
@@ -50,6 +61,7 @@ const sendForm = ({idForm}) => {
                 input.disabled = true;
                 input.style.background = 'rgba(255,255,255,0.9)';
             });
+
             sendData(formBody)
             .then(() => {
                 statusBlock.innerHTML = '';

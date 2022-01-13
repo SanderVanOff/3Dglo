@@ -23,10 +23,13 @@ const forms = () => {
             if (input.type === 'text' || input.placeholder === 'Ваше сообщение') {
                 input.addEventListener('blur', (e) => {
                    
-                    if (!/[^а-яА-ЯёЁ0-9 -]/ig.test(e.target.value)) {
+                    if (!/[^а-яА-ЯёЁ0-9 -]/ig.test(e.target.value) && e.target.value.length > 2) {
                         getValidMessage(e.target, 'success');
                         input.setCustomValidity('');
-                    } else {
+                    } else if(e.target.value.length <= 2) {
+                        getValidMessage(e.target, 'error');
+                        input.setCustomValidity('допустимо не меньше 2 символов');
+                    }else {
                         getValidMessage(e.target, 'error');
                         input.setCustomValidity('допустима только кириллица');
                         
@@ -52,14 +55,17 @@ const forms = () => {
             } else if (input.type === 'tel') {
                 input.addEventListener('blur', (e) => {
 
-                    if (!/[^0-9\+ \-\(\)]/ig.test(e.target.value)) {
+                    if (!/[^0-9\+ \-\(\)]/ig.test(e.target.value) && e.target.value.length >= 6 && e.target.value.length <= 12) {
                         getValidMessage(e.target, 'success');
                         input.setCustomValidity('');
                         const arr = [];
                         e.target.value.replace(/([7-8]{1})([0-9]{3})([0-9]{3})([0-9]{2})([0-9]{2})/gi, (match, p1, p2, p3, p4, p5) => {
                             e.target.value = `+7 (${p2})-${p3}-${p4}-${p5}`;
                         });
-                    } else {
+                    } else if(e.target.value.length < 6 || e.target.value.length > 12){
+                        getValidMessage(e.target, 'error');
+                        input.setCustomValidity('длина номера телефона должна быть не менее 6 символов и не более 12 символов');
+                    }else {
                         getValidMessage(e.target, 'error');
                         input.setCustomValidity('разрешены цифры, знак “+”, круглые скобки и дефис');
                     }
