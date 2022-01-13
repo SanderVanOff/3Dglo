@@ -34,7 +34,15 @@ sendForm({
 });
 sendForm({
     idForm: '#form2',
+    someElem: [{
+        type: 'block',
+        id: '#total'
+    }]
 });
 sendForm({
     idForm: '#form3',
+    someElem: [{
+        type: 'block',
+        id: '#total'
+    }]
 });
